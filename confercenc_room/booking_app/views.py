@@ -21,7 +21,7 @@ class AddConferenceRoom(View):
             return render(request, "add_room.html", ctx)
         else:
             try:
-                room = Room.objects.create(name=name, capacity=capacity, projector=projector)
+                Room.objects.create(name=name, capacity=capacity, projector=projector)
                 return HttpResponseRedirect("/")
             except Exception as e:
                 ctx = {"result" : "Room already exist"}
@@ -32,6 +32,14 @@ class RoomsList(View):
     def get(self, request):
         rooms = Room.objects.all()
         return render(request, "room_list.html", {"rooms": rooms})
+
+
+class DeleteRoom(View):
+    def get(self, request, id):
+            to_delete = Room.objects.get(id=id)
+            to_delete.delete()
+            return HttpResponseRedirect("room-list")
+
 
 
 

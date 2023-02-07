@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.views import View
 from .models import Room
+
+
 
 class AddConferenceRoom(View):
     def get(self, request):
@@ -40,6 +42,35 @@ class DeleteRoom(View):
             to_delete.delete()
             return HttpResponseRedirect("room-list")
 
+
+class ModifyRoom(View):
+    def get(self, request, id):
+        room = Room.objects.get(id=id)
+        return render(request, "modify_room.html", {"room":room})
+    def post(self, request, id):
+        name = request.POST.get("name")
+        capacity = request.POST.get("capacity")
+        projector = request.POST.get("projector")
+
+        if projector == None:
+            projector = False
+        else:
+            projector = True
+
+        if str(name) is "" or int(capacity) <= 0:
+            ctx = {"result" : "Data are incorrect"}
+            return render(request, "modify_room.html", ctx)
+        else:
+            try:
+                room = Room.objects.get(id=id)
+                room.name = name
+                room.capacity = capacity
+                room.projector = projector
+                room.save()
+                return HttpResponseRedirect("/")
+            except Exception as e:
+                ctx = {"result" : "Room already exist"}
+                return render(request, "add_room.html", ctx), e
 
 
 

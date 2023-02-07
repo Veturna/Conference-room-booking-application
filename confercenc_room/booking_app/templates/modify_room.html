@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify room</title>
+</head>
+<body>
+ <div>
+        <form method="post">Modify the conference room - {{room.name}}<br><br>
+            {% csrf_token %}
+            <label>Name<br>
+                <input type="text" name="name"><br><br>
+            </label>
+            <label>Capacity<br>
+                <input type="number" name="capacity"><br><br>
+            </label>
+            <label>Projector, check to add
+                <input type="checkbox" name="projector"><br><br>
+            </label>
+            <input type="submit" value="submit">
+        </form>
+        </div>
+        <div><p>{{result}}</p></div>
+</body>
+</html>

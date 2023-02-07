@@ -30,9 +30,8 @@ class AddConferenceRoom(View):
 
 class RoomsList(View):
     def get(self, request):
-        pass
-    def post(self, request):
-        pass
+        rooms = Room.objects.all()
+        return render(request, "room_list.html", {"rooms": rooms})
 
 
 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views import View
 from .models import Room, Booking
-
+import datetime
 
 class AddConferenceRoom(View):
     def get(self, request):
@@ -73,9 +73,26 @@ class ModifyRoom(View):
 
 class ReservationView(View):
     def get(self, request, id):
-        room = Booking.objects.get(room_id=id)
+        room = Room.objects.get(id=id)
         return render(request, "reservation_view.html", {"room":room})
     def post(self, request, id):
+        room = Room.objects.get(id=id)
+        comment = request.POST.get("comment")
+        date = request.POST.get("date")
+
+        if Booking.objects.filter(room_id=room, date=date):
+            return render(request, "reservation_view.html", {"result":"The room is already booking"})
+        elif date < str(datetime.date.today()):
+            return render(request, "reservation_view.html", {"result":"The date need to be at least today"})
+        else:
+            Booking.objects.create(room_id=room, date=date, comment=comment)
+            return HttpResponseRedirect("/")
+
+
+class RoomDetails(View):
+    def get(self, request, id):
+        room = Room.objects.get(id=id)
+        return render(request, "reservation_view.html", {"room": room})
 
 
 

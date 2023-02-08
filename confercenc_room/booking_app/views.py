@@ -32,6 +32,9 @@ class AddConferenceRoom(View):
 class RoomsList(View):
     def get(self, request):
         rooms = Room.objects.all()
+        for room in rooms:
+            reservation_dates = [reservation.date for reservation in room.booking_set.all()]
+            room.reserved = datetime.date.today() in reservation_dates
         return render(request, "room_list.html", {"rooms": rooms})
 
 
@@ -84,16 +87,16 @@ class ReservationView(View):
             return render(request, "reservation_view.html", {"result":"The room is already booking"})
         elif date < str(datetime.date.today()):
             return render(request, "reservation_view.html", {"result":"The date need to be at least today"})
-        else:
-            Booking.objects.create(room_id=room, date=date, comment=comment)
-            return HttpResponseRedirect("/")
+
+        Booking.objects.create(room_id=room, date=date, comment=comment)
+        return HttpResponseRedirect("/")
 
 
 class RoomDetails(View):
     def get(self, request, id):
         room = Room.objects.get(id=id)
         reservations = room.booking_set.filter(date=str(datetime.date.today())).order_by('date')
-        return render(request, "room_details.html", {"room": room, "reservation":reservations})
+        return render(request, "room_details.html", {"room": room, "reservations":reservations})
 
 
 

@@ -20,8 +20,6 @@
   {% for reservation in reservations %}
   <li>Date: {{reservation.date}}</li>
   <li>Comment: {{reservation.comment}}</li>
-  {% empty %}
-  <li>No reservations</li>
   {% endfor %}
 </div>
 </body>

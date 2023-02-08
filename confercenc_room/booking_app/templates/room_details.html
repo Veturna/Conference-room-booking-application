@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room details</title>
+</head>
+<body>
+<div>
+  <ul>Room {{room.name}} details:</ul>
+  <li>Name: {{room.name}}</a> </li>
+  <li>Capacity: {{room.capacity}}</li>
+  <li>Is projector: {{room.projector}}</li>
+  <li><a href="room/modify/{{room.id}}/"><input type="button" name="edit" value="edit"></a> </li>
+  <li><a href="room/delete/{{room.id}}/"><input type="button" name="delete" value="delete"></a> </li>
+  <li><a href="room/reserve/{{room.id}}/"><input type="button" name="book" value="book"></a> </li><br>
+
+</div>
+<div>
+  <ul>Reserved:  </ul>
+  {% for reservation in reservations %}
+  <li>Date: {{reservation.date}}</li>
+  <li>Comment: {{reservation.comment}}</li>
+  {% empty %}
+  <li>No reservations</li>
+  {% endfor %}
+</div>
+</body>
+</html>

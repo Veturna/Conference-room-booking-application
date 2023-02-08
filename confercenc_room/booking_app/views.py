@@ -92,7 +92,8 @@ class ReservationView(View):
 class RoomDetails(View):
     def get(self, request, id):
         room = Room.objects.get(id=id)
-        return render(request, "reservation_view.html", {"room": room})
+        reservations = room.booking_set.filter(date=str(datetime.date.today())).order_by('date')
+        return render(request, "room_details.html", {"room": room, "reservation":reservations})
 
 
 

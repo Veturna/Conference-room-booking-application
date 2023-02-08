@@ -77,7 +77,8 @@ class ModifyRoom(View):
 class ReservationView(View):
     def get(self, request, id):
         room = Room.objects.get(id=id)
-        return render(request, "reservation_view.html", {"room":room})
+        reservations = room.booking_set.filter(date=str(datetime.date.today())).order_by('date')
+        return render(request, "reservation_view.html", {"room":room, "reservations":reservations})
     def post(self, request, id):
         room = Room.objects.get(id=id)
         comment = request.POST.get("comment")

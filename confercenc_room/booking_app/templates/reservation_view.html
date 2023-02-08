@@ -6,7 +6,7 @@
 </head>
 <body>
         <div>
-          <form method="post">All reservation for conference room: {{room.name}}<br><br>
+          <form method="post">Reservation for conference room: {{room.name}}<br><br>
             {% csrf_token %}
             <label>Comments<br>
                 <input type="text" name="comment"><br><br>
@@ -18,5 +18,12 @@
         </form>
         </div>
         <div><p>{{result}}</p></div>
+<div>
+    <ul>All reservations for this room</ul>
+    {% for reservation in reservations %}
+        <li>{{reservation.comment}}</li>
+        <li>{{reservation.date}}</li>
+    {% endfor %}
+</div>
 </body>
 </html>

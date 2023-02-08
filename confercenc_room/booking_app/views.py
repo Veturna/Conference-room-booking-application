@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.views import View
-from .models import Room
-
+from .models import Room, Booking
 
 
 class AddConferenceRoom(View):
@@ -71,6 +70,15 @@ class ModifyRoom(View):
             except Exception as e:
                 ctx = {"result" : "Room already exist"}
                 return render(request, "add_room.html", ctx), e
+
+class ReservationView(View):
+    def get(self, request, id):
+        room = Booking.objects.get(room_id=id)
+        return render(request, "reservation_view.html", {"room":room})
+    def post(self, request, id):
+
+
+
 
 
 

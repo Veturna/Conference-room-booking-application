@@ -3,23 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Add a conference room</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
-        <div>
-        <form method="post">Add a conference room<br><br>
-            {% csrf_token %}
-            <label>Name<br>
-                <input type="text" name="name"><br><br>
-            </label>
-            <label>Capacity<br>
-                <input type="number" name="capacity"><br><br>
-            </label>
-            <label>Projector, check to add
-                <input type="checkbox" name="projector"><br><br>
-            </label>
+<!--Nav -->
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">System rezerwacji sal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="/">Lista wszystkich sal<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/room/new/">Dodaj salę</a>
+    </div>
+  </div>
+</nav>
+<!-- Nav -->
+
+<!-- Form -->
+<div class="card">
+    <div class="card-body">
+    <form method="post">Add a conference room<br><br>
+        {% csrf_token %}
+        <div class="form-group">
+        <label>Name<br></label>
+            <input type="text" name="name"><br><br>
+        </div>
+        <div class="form-group">
+        <label>Capacity<br></label>
+            <input type="number" name="capacity"><br><br>
+        </div>
+        <div class="form-group">
+            <label>Projector, check to add</label>
+            <input type="checkbox" name="projector"><br><br>
+        </div>
             <input type="submit" value="submit">
         </form>
         </div>
+    </div>
         <div><p>{{result}}</p></div>
+
+{% if error %}
+<!-- Form error -->
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{error}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- Form error -->
+{% endif %}
 </body>
 </html>

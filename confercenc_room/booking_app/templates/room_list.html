@@ -7,6 +7,7 @@
       <th scope="col" class="col-1">#</th>
       <th scope="col" class="col-2">Name</th>
       <th scope="col" class="col-1">Capacity</th>
+        <th scope="col" class="col-2">Availability</th>
       <th scope="col" class="col-5" colspan="4">Projector</th>
     </tr>
   </thead>
@@ -18,6 +19,11 @@
         <a href="/room/{{ room.id }}/">{{ room.name }}</a>
       </td>
       <td class="col-1">{{ room.capacity }}</td>
+              {% if room.reserved %}
+        <td class="col-2" style="color:red;">Already booking</td>
+      {% else %}
+        <td class="col-2" style="color:green;">Available</td>
+      {% endif %}
       {% if room.projector == True %}
         <td class="col-2" style="color:green;">&#9745;</td>
       {% else %}

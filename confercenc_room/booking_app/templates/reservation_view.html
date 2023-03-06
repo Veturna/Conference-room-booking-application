@@ -28,7 +28,21 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+{% endif %}
 <!-- Form error -->
 
-{% endif %}
+<div class="card">
+  <div class="card-body">
+<h3>Booking</h3>
+    <ul class="list-group">
+      {% for reservation in reservations %}
+        <li class="list-group-item">
+          <h4>{{ reservation.date }}</h4>
+          <p>{{ reservation.comment }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+
 {% endblock %}

@@ -1,29 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room details</title>
-      {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
-<div>
-  <ul>Room {{room.name}} details:</ul>
-  <li>Name: {{room.name}}</a> </li>
-  <li>Capacity: {{room.capacity}}</li>
-  <li>Is projector: {{room.projector}}</li>
-  <li><a href="room/modify/{{room.id}}/"><input type="button" name="edit" value="edit"></a> </li>
-  <li><a href="room/delete/{{room.id}}/"><input type="button" name="delete" value="delete"></a> </li>
-  <li><a href="room/reserve/{{room.id}}/"><input type="button" name="book" value="book"></a> </li><br>
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+  <h2>Name: {{ room.name }}</h2>
+  <p>Capacity: {{ room.capacity }}</p>
+  <p>Projector: {{ room.projector }}
+        {% if room.projector == True %}
+        <span style="color:green;">&#9745;</span>
+        {% else %}
+        <span style="color:red;">&#9746;</span>
+        {% endif %}
+  </p>
+      <p>
+        <a href="room/modify/{{ room.id }}/"><input type="button" name="edit" value="edit"></a>
+        <a href="room/delete/{{ room.id }}/"><input type="button" name="delete" value="delete"></a>
+        <a href="room/reserve/{{ room.id }}/"><input type="button" name="book" value="book"></a>
+      </p>
 
+    <h3>Booking</h3>
+    <ul class="list-group">
+      {% for reservation in reservations %}
+        <li class="list-group-item">
+          <h4>{{ reservation.date }}</h4>
+          <p>{{ reservation.comment }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
-<div>
-  <ul>Reserved:  </ul>
-  {% for reservation in reservations %}
-  <li>Date: {{reservation.date}}</li>
-  <li>Comment: {{reservation.comment}}</li>
-  {% endfor %}
-</div>
-</body>
-</html>
+{% endblock %}

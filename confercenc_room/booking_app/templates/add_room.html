@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add a conference room</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
-<!--Nav -->
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">System rezerwacji sal</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="/">Lista wszystkich sal<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link active" href="/room/new/">Dodaj salę</a>
-    </div>
-  </div>
-</nav>
-<!-- Nav -->
-
-<!-- Form -->
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
 <div class="card">
     <div class="card-body">
     <form method="post">Add a conference room<br><br>
@@ -56,5 +33,4 @@
 </div>
 <!-- Form error -->
 {% endif %}
-</body>
-</html>
+{% endblock %}

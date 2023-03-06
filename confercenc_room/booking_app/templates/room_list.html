@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Room list</title>
-        {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+  {% block content %}
       <div>
         {% for room in rooms %}
         <li>Name: <a href="room/{{room.id}}/">{{room.name}}</a> </li>
@@ -25,5 +18,4 @@
           <li>No rooms</li>
           {% endfor %}
       </div>
-</body>
-</html>
+{% endblock %}

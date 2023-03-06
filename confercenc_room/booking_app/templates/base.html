@@ -8,17 +8,21 @@
     {% bootstrap_javascript %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Conference room booking application</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="/">Lista wszystkich sal<span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="/room/new/">Dodaj salę</a>
-        </div>
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">System rezerwacji sal</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Lista wszystkich sal<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="/room/new/">Dodaj salę</a>
     </div>
-    </nav>
+  </div>
+</nav>
+<!-- Nav -->
+  {% block content %}
+  {% endblock %}
 </body>
 </html>
